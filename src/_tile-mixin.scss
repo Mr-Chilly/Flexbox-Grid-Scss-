@@ -1,0 +1,120 @@
+@import './sizes';
+
+@mixin base-tile {
+  background-color: $colorPrimaryLight;
+  box-shadow: rem-size(0 2 2 0) rgba($colorPrimaryDark, .08);
+}
+
+@mixin tile-wrapper-style {
+  @include base-tile();
+  border-radius: $radiusDefault;
+}
+
+@mixin tile-is-read {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  pointer-events: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: size(12);
+  height: size(12);
+  background-color: $colorSuccess;
+  color: $colorPrimaryLight;
+  border-radius: 50%;
+  z-index: zindex($main, content);
+}
+
+@mixin rounded-tile-wrapper-style {
+  @include base-tile();
+  border-radius: $radiusTileSmall $radiusTileBig $radiusTileBig;
+  padding: size(4);
+
+  @include media('<sm') {
+    border-radius: 0 0 $radiusTileSmall $radiusTileSmall;
+    padding: size(4 2);
+  }
+}
+
+@mixin search-tile-base {
+  @include tile-wrapper-style;
+  display: flex;
+  padding: 0;
+  min-height: size(31);
+  width: 100%;
+  overflow: hidden;
+  flex-direction: column-reverse;
+
+  figure {
+    flex-shrink: 0;
+  }
+
+  @include media('>=gridSm') {
+    figure {
+      flex-shrink: initial;
+    }
+  }
+
+  > aside {
+    display: flex;
+    margin: size(2);
+    position: relative;
+    flex-grow: 1;
+    flex-direction: column;
+
+    @include media('>=gridSm') {
+      /* stylelint-disable selector-no-qualifying-type */
+      &.has-image {
+        width: 100%;
+        max-width: calc(100% - #{size(35)});
+      }
+    }
+  }
+
+  @include media('>=gridSm') {
+    flex-direction: row;
+  }
+}
+
+// Not used on success stories because that uses the image flipper
+@mixin search-tile-image {
+  .atom-responsive-image {
+    img {
+      display: block;
+
+      @include media('>=gridSm') {
+        width: auto;
+        max-width: size(31);
+      }
+    }
+  }
+}
+
+@mixin week-zero-tile {
+  padding: size(3 4 4);
+  width: 100%;
+
+  .atom-rich-text-block {
+    @include block-content-style((
+      h2: confident,
+      h3: confident,
+      p: primary-elegant,
+    ));
+  }
+
+  > h2 {
+    color: $colorBrand;
+    // Needed when the style is not within the rich text block
+    @include style-confident;
+  }
+
+  @include rounded-tile-wrapper-style;
+
+  @include media('>=lg') {
+    max-width: size(48);
+  }
+
+}
+

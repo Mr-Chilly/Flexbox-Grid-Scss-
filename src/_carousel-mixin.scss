@@ -1,0 +1,52 @@
+// The SCSS importing this mixin IS REQUIRED to import colors and margins.
+// @import 'theme/variables/colors';
+// @import 'theme/variables/margins';
+@import '../../../default/theme/utils/media-query-mixins';
+
+@mixin carousel-arrows {
+  .slick-arrow {
+    position: absolute;
+    top: 50%;
+    border: 0;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $colorDarkTone;
+    z-index: 1;
+    width: size(6);
+    height: size(6);
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: opacity 300ms linear, color 300ms linear, visibility 300ms linear;
+
+    @include media('<sm') {
+      display: none;
+    }
+
+    &.slick-next {
+      right: size(-9);
+    }
+
+    &.slick-prev {
+      left: size(-9);
+    }
+
+    &.slick-disabled {
+      opacity: 0;
+      visibility: hidden;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background: $colorBrand;
+    }
+
+    .atom-icon {
+      display: flex;
+      justify-content: center;
+      color: $colorPrimaryLight;
+    }
+  }
+}

@@ -1,0 +1,82 @@
+@import './sizes';
+@import '../../../us/theme/sizes/media-queries';
+
+$shopModalMinWidth: size(8);
+$shopModalMinHeight: 70vh;
+
+@mixin shop-modal {
+  min-width: $shopModalMinWidth;
+  min-height: $shopModalMinHeight;
+
+  .molecule-custom-scroll-bar {
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .scroll-content-wrapper {
+    padding: size(6 4);
+
+    > .atom-text {
+      margin-bottom: size(4);
+    }
+
+    @include media('>=xs') {
+      padding: size(8);
+    }
+  }
+
+  .atom-row {
+    margin-bottom: size(2);
+  }
+
+  .atom-label {
+    margin-bottom: size(2);
+  }
+
+  .molecule-check-box {
+    .atom-label {
+      margin-bottom: 0;
+    }
+  }
+
+  .cta-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-top: size(2);
+    margin-top: size(2);
+
+    @include media('>=sm') {
+      flex-direction: row;
+    }
+
+    .atom-button {
+      width: 100%;
+      margin-bottom: size(2);
+
+      @include media('>=sm') {
+        width: 50%;
+      }
+    }
+
+    .atom-button:nth-of-type(1) {
+      margin-right: 0;
+
+      @include media('>=sm') {
+        margin-right: size(1);
+      }
+    }
+
+    .atom-button:nth-of-type(2) {
+      margin-left: 0;
+
+      @include media('>=sm') {
+        margin-left: size(1);
+      }
+    }
+  }
+
+  .atom-form-error-messages {
+    margin-bottom: rem-size(-2);
+  }
+}

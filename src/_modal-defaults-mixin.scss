@@ -1,0 +1,75 @@
+@import '../../../default/theme/utils/media-query-mixins';
+
+@mixin modal-defaults() {
+  background: $colorPrimaryLight;
+  margin: 0 auto;
+  max-width: $sizeLargeSmallWidth;
+  padding: size(6 15);
+  position: relative;
+  width: 100%;
+
+  .modal-section {
+    margin-bottom: size(4);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  h2 {
+    margin-bottom: size(3);
+    width: 75%;
+  }
+
+  form {
+    > p {
+      &:first-of-type {
+        margin-bottom: size(3);
+
+        @include media('>=sm') {
+          width: 75%;
+          margin-bottom: size(6);
+        }
+      }
+    }
+
+    .molecule-form-group {
+      margin-bottom: size(3);
+
+      &:last-of-type {
+        margin-bottom: size(4);
+      }
+    }
+
+    .atom-label {
+      margin-bottom: size(2);
+    }
+
+    .atom-button {
+      border: 0;
+      margin-right: size(1);
+
+      @include media('>=sm') {
+        min-width: size(26);
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:focus {
+        border-color: transparent;
+        box-shadow: none;
+        outline: none;
+      }
+
+      &.is-tertiary {
+        color: $colorDarkTone;
+      }
+    }
+  }
+
+  @include media('<md') {
+    padding: size(6 3 8);
+  }
+}

@@ -1,0 +1,6 @@
+// Mixin to be able to maintain the 16/9 aspect ratio by passing a fixed width
+@mixin aspect-ratio-fixed-width($width) {
+  position: relative;
+  width: $width;
+  height: calc(#{$width} * (9 / 16));
+}

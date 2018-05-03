@@ -1,0 +1,47 @@
+@mixin select($type) {
+  @include style-formal-original;
+
+  &.dirty {
+    select {
+      @include placeholder-color(map-get($type, dirtyPlaceholderColor), 1);
+      color: map-get($type, dirtyColor);
+    }
+  }
+
+  .atom-icon {
+    position: absolute;
+    right: size(1);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 11;
+    pointer-events: none;
+    color: map-get($type, arrowColor);
+  }
+
+  select {
+    @include input;
+    @include placeholder-color(map-get($type, placeholderColor), 1);
+    border: rem-size(1) solid map-get($type, borderColor);
+    appearance: none; // appearance is unknown, however autoprefixer compiles it to correct browser specific property
+    outline: none;
+    text-decoration: none;
+    width: 100%;
+    padding: rem-size(13 16);
+    color: map-get($type, color);
+    cursor: pointer;
+    background-color: map-get($type, background);
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:focus {
+      @include input-focus-state;
+      z-index: 5;
+    }
+
+    option {
+      color: map-get($type, optionColor);
+    }
+  }
+}

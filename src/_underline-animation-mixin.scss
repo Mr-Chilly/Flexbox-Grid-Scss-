@@ -1,0 +1,29 @@
+// Mixin to add an underline animation on hover to atom-text, which can be used for buttons
+
+@mixin underline-animation {
+  .atom-text {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: rem-size(1);
+      width: 100%;
+      background-color: currentColor;
+      opacity: 0;
+      transform: scaleX(0);
+      transition: transform 100ms ease-out, opacity 50ms linear;
+    }
+  }
+
+  &:hover {
+    .atom-text {
+      &::after {
+        transform: scaleX(1);
+        opacity: 1;
+      }
+    }
+  }
+}

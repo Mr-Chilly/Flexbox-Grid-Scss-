@@ -1,0 +1,7 @@
+// Add mixins for page-level styling here
+
+@mixin page-loader-size {
+  > .atom-loader {
+    margin: 30vh auto calc(70vh - #{size(11)});
+  }
+}

@@ -1,0 +1,22 @@
+@mixin border($tlr...) {
+  @each $tl in $tlr {
+    @if $tl == 't' {
+      border-top: $borderColor $borderSize $borderStyle;
+    }
+    @else if $tl == 'r' {
+      border-right: $borderColor $borderSize $borderStyle;
+    }
+    @else if $tl == 'b' {
+      border-bottom: $borderColor $borderSize $borderStyle;
+    }
+    @else if $tl == 'l' {
+      border-left: $borderColor $borderSize $borderStyle;
+    }
+    @else if $tl == 'all' {
+      border: $borderColor $borderSize $borderStyle;
+    }
+    @else if $tl == '0' {
+      border: 0;
+    }
+  }
+}
