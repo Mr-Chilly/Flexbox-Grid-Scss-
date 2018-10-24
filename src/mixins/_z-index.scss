@@ -1,0 +1,17 @@
+/// Z-Index function
+/// @param {string} $list (Array) - The list to find the current z-index in
+/// @param {string} $element (String) - The name of the current element, must be in the $list
+/// @returns {number}
+
+$stack: content, form, footer, navigation, header, modal;
+
+@function zindex($list: $stack, $element) {
+  $index: index($list, $element);
+
+  @if $index {
+    @return $index * 10;
+  }
+
+  @warn 'There is no item "#{$element}" in this list; choose one of: #{$list}';
+  @return null;
+}

@@ -1,11 +1,9 @@
 /// This is the flexbox grid system.
 /// It will apply annotations to all items from file.
 /// @group Flexbox
-@import './grid-breakpoints';
+@import '../breakpoints';
 $gridColumns: 12 !default;
 $gridGutter: $gridGutter !default;
-
-
 
 @function get-col-percent($columnNum) {
   @return $columnNum / $gridColumns * 100%;
@@ -48,8 +46,7 @@ $gridGutter: $gridGutter !default;
         max-width: get-col-percent($i);
         width: 100%;
       }
-    }
-    @else {
+    } @else {
       %#{$namespace}-#{$i} {
         @include spacing(($gridGutter), padding);
         margin-bottom: $gridGutter * 2;
@@ -72,8 +69,7 @@ $gridGutter: $gridGutter !default;
 @each $name, $breakpoint in $gridBreakpoints {
   @if $name == 'xs' {
     @include grid-sizsize($name);
-  }
-  @else {
+  } @else {
     @media only screen and (min-width: #{$breakpoint}) {
       @include grid-sizsize($name);
       @include grid-wrapper($breakpoint);

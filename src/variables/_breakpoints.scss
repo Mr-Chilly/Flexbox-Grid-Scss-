@@ -1,13 +1,13 @@
-@import './sizes';
+// @import '../mixin/sizes';
 // Creates a list of breakpoints based on grid calculations.
 // Should be used with components within the grid in place of the project breakpoints, so that the behavior is consistent.
 
-$gridGutter: size(2) !default;
+$gridGutter: 16px !default;
 // gridGutter applies left and right padding on a grid item, therefore the apparent gutter when two items are placed next to each other is double
 $visualGutter: ($gridGutter * 2);
 
 // The grid item on desktop cannot go below this value. size(35) = rem-size(280) / 17.5rem
-$desktopItemSize: size(35);
+$desktopItemSize: 250px;
 
 $gridBreakpointXs: ($desktopItemSize);
 $gridBreakpointSm: (($desktopItemSize + $visualGutter) * 2);

@@ -1,0 +1,14 @@
+@import 'rem-size';
+
+@mixin badge($size, $bgColor, $textColor) {
+  width: $size;
+  height: $size;
+  flex: 0 0 $size;
+  border-radius: rem-size(999);
+  background: $bgColor;
+  color: $textColor;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

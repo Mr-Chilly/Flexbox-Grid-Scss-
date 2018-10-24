@@ -6,7 +6,6 @@ $pathFont: './fonts/';
 /// @author Floris Bernard
 ////
 
-
 /// Font Face
 /// @param {string} $fontName - Name of the font
 /// @param {string} $folderName - Subfolder inside the fonts folder
@@ -20,14 +19,13 @@ $pathFont: './fonts/';
     src: url('#{$pathFont}#{$folderName}/#{$fileName}.eot');
     src: url('#{$pathFont}#{$folderName}/#{$fileName}.eot?#iefix') format('embedded-opentype'),
       //url('#{$pathFont}#{$folderName}/#{$fileName}.woff2') format('woff2'),
-      url('#{$pathFont}#{$folderName}/#{$fileName}.woff') format('woff'),
+        url('#{$pathFont}#{$folderName}/#{$fileName}.woff')format('woff'),
       url('#{$pathFont}#{$folderName}/#{$fileName}.ttf') format('truetype'),
       url('#{$pathFont}#{$folderName}/#{$fileName}.svg##{$fontName}') format('svg');
     font-weight: $fontWeight;
     font-style: $fontStyle;
   }
 }
-
 
 /// Font Face, excluding woff format
 /// @param {string} $fontName - Name of the font
@@ -36,7 +34,13 @@ $pathFont: './fonts/';
 /// @param {string} $fontWeight (normal) - Font weight value
 /// @param {string} $fontStyle (normal) - Font style value
 
-@mixin font-face-no-woff($fontName, $folderName, $fileName, $fontWeight: normal, $fontStyle: normal) {
+@mixin font-face-no-woff(
+  $fontName,
+  $folderName,
+  $fileName,
+  $fontWeight: normal,
+  $fontStyle: normal
+) {
   @font-face {
     font-family: $fontName;
     src: url('#{$pathFont}#{$folderName}/#{$fileName}.eot');

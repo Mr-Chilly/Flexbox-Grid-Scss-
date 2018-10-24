@@ -3,7 +3,6 @@
 // other values needed here...
 /* stylelint-disable unit-whitelist, block-no-empty */
 
-
 //
 // Creates a list of static expressions or media types
 //
@@ -21,10 +20,11 @@ $mediaExpressions: (
   'handheld': 'handheld',
   'landscape': '(orientation: landscape)',
   'portrait': '(orientation: portrait)',
-  'retina2x': '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)',
-  'retina3x': '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi), (min-resolution: 3dppx)'
+  'retina2x':
+    '(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)',
+  'retina3x':
+    '(-webkit-min-device-pixel-ratio: 3), (min-resolution: 350dpi), (min-resolution: 3dppx)',
 ) !default;
-
 
 //
 // List of default breakpoints
@@ -35,6 +35,7 @@ $breakpointMd: 768px;
 $breakpointLg: 1024px;
 $breakpointXl: 1280px;
 $breakpointXxl: 1440px;
+$breakpointXxxl: 1600px;
 
 $breakpoints: (
   'xs': $breakpointXs,
@@ -43,6 +44,7 @@ $breakpoints: (
   'lg': $breakpointLg,
   'xl': $breakpointXl,
   'xxl': $breakpointXxl,
+  'xxxl': $breakpointXxxl,
   'gridXs': $gridBreakpointXs,
   'gridSm': $gridBreakpointSm,
   'gridMd': $gridBreakpointMd,
@@ -72,9 +74,9 @@ $breakpoints: (
 //
 $unitIntervals: (
   'px': 1,
-  'em': .01,
-  'rem': .1,
-  '': 0
+  'em': 0.01,
+  'rem': 0.1,
+  '': 0,
 ) !default;
 //
 // Defines whether support for media queries is available, useful for creating separate stylesheets
@@ -165,7 +167,6 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
 // @access private
 //
 
-
 //
 // Log a message either with `@error` if supported
 // else with `@warn`, using `feature-exists('at-error')`
@@ -176,15 +177,13 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
 @function log($message) {
   @if feature-exists('at-error') {
     @error $message;
-  }
-  @else {
+  } @else {
     @warn $message;
     $noop: noop();
   }
 
   @return $message;
 }
-
 
 //
 // Wrapper mixin for the log function so it can be used with a more friendly
@@ -195,15 +194,16 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
 // @param {String} $message - Message to log
 //
 @mixin log($message) {
-  @if log($message) {}
+  @if log($message) {
+  }
 }
-
 
 //
 // Function with no `@return` called next to `@warn` in Sass 3.3
 // to trigger a compiling error and stop the process.
 //
-@function noop() {}
+@function noop() {
+}
 
 //
 // Determines whether a list of conditions is intercepted by the static breakpoint.
@@ -216,7 +216,8 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
   $noMediaBreakpointValue: map-get($breakpoints, $imNoMediaBreakpoint);
 
   @if not $noMediaBreakpointValue {
-    @if log('`#{$imNoMediaBreakpoint}` is not a valid breakpoint.') {}
+    @if log('`#{$imNoMediaBreakpoint}` is not a valid breakpoint.') {
+    }
   }
 
   @each $condition in $conditions {
@@ -225,18 +226,17 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
       $prefix: get-expression-prefix($operator);
       $value: get-expression-value($condition, $operator);
       @if ($prefix == 'max' and $value <= $noMediaBreakpointValue) or
-        ($prefix == 'min' and $value > $noMediaBreakpointValue) {
+        ($prefix == 'min' and $value > $noMediaBreakpointValue)
+      {
         @return false;
       }
-    }
-    @else if not index($imNoMediaExpressions, $condition) {
+    } @else if not index($imNoMediaExpressions, $condition) {
       @return false;
     }
   }
 
   @return true;
 }
-
 
 //
 // Get operator of an expression
@@ -256,10 +256,9 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
   // rely on the `log(..)` function rather than the `log(..)` mixin. Because
   // functions cannot be called anywhere in Sass, we need to hack the call in
   // a dummy variable, such as `$noop`. If anybody ever raise a scoping issue with
-  // Sass 3.3, change this line in `@if log(..) {}` instead. 
+  // Sass 3.3, change this line in `@if log(..) {}` instead.
   $noop: log('No operator found in `#{$expression}`.');
 }
-
 
 //
 // Get dimension of an expression, based on a found operator
@@ -281,7 +280,6 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
   @return $dimension;
 }
 
-
 //
 // Get dimension prefix based on an operator
 //
@@ -292,7 +290,6 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
 @function get-expression-prefix($operator) {
   @return if(index(('<', '<=', '≤'), $operator), 'max', 'min');
 }
-
 
 //
 // Get value of an expression, based on a found operator
@@ -308,8 +305,7 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
 
   @if map-has-key($breakpoints, $value) {
     $value: map-get($breakpoints, $value);
-  }
-  @else {
+  } @else {
     $value: to-number($value);
   }
 
@@ -326,14 +322,12 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
 
   @if $operator == '>' {
     $value: $value + $interval;
-  }
-  @else if $operator == '<' {
+  } @else if $operator == '<' {
     $value: $value - $interval;
   }
 
   @return $value;
 }
-
 
 //
 // Parse an expression to return a valid media-query expression
@@ -382,8 +376,6 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
   @return $result;
 }
 
-
-
 //
 // Casts a string into a number
 //
@@ -394,8 +386,7 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
 @function to-number($value) {
   @if type-of($value) == 'number' {
     @return $value;
-  }
-  @else if type-of($value) != 'string' {
+  } @else if type-of($value) != 'string' {
     $noop: log('Value for `to-number` should be a number or a string.');
   }
 
@@ -403,7 +394,18 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
   $result: 0;
   $digits: 0;
   $minus: ($firstCharacter == '-');
-  $numbers: ('0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9);
+  $numbers: (
+    '0': 0,
+    '1': 1,
+    '2': 2,
+    '3': 3,
+    '4': 4,
+    '5': 5,
+    '6': 6,
+    '7': 7,
+    '8': 8,
+    '9': 9,
+  );
 
   // Remove +/- sign if present at first character
   @if ($firstCharacter == '+' or $firstCharacter == '-') {
@@ -413,17 +415,15 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
   @for $i from 1 through str-length($value) {
     $character: str-slice($value, $i, $i);
 
-    @if not (index(map-keys($numbers), $character) or $character == '.') {
+    @if not(index(map-keys($numbers), $character) or $character == '.') {
       @return to-length(if($minus, -$result, $result), str-slice($value, $i));
     }
 
     @if $character == '.' {
       $digits: 1;
-    }
-    @else if $digits == 0 {
+    } @else if $digits == 0 {
       $result: $result * 10 + map-get($numbers, $character);
-    }
-    @else {
+    } @else {
       $digits: $digits * 10;
       $result: $result + map-get($numbers, $character) / $digits;
     }
@@ -431,7 +431,6 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
 
   @return if($minus, -$result, $result);
 }
-
 
 //
 // Add `$unit` to `$value`
@@ -442,7 +441,23 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
 // @return {Number} - `$value` expressed in `$unit`
 //
 @function to-length($value, $unit) {
-  $units: ('px': 1px, 'cm': 1cm, 'mm': 1mm, '%': 1%, 'ch': 1ch, 'pc': 1pc, 'in': 1in, 'em': 1em, 'rem': 1rem, 'pt': 1pt, 'ex': 1ex, 'vw': 1vw, 'vh': 1vh, 'vmin': 1vmin, 'vmax': 1vmax);
+  $units: (
+    'px': 1px,
+    'cm': 1cm,
+    'mm': 1mm,
+    '%': 1%,
+    'ch': 1ch,
+    'pc': 1pc,
+    'in': 1in,
+    'em': 1em,
+    'rem': 1rem,
+    'pt': 1pt,
+    'ex': 1ex,
+    'vw': 1vw,
+    'vh': 1vh,
+    'vmin': 1vmin,
+    'vmax': 1vmax,
+  );
 
   @if not index(map-keys($units), $unit) {
     $noop: log('Invalid unit `#{$unit}`.');
@@ -536,13 +551,13 @@ $imNoMediaExpressions: ('screen', 'portrait', 'landscape') !default;
 // need to target anchor
 @mixin media($conditions...) {
   @if ($imMediaSupport and length($conditions) == 0) or
-    (not $imMediaSupport and im-intercepts-static-breakpoint($conditions...)) {
+    (not $imMediaSupport and im-intercepts-static-breakpoint($conditions...))
+  {
     @content;
-  }
-  @else if ($imMediaSupport and length($conditions) > 0) {
+  } @else if ($imMediaSupport and length($conditions) > 0) {
     @media #{unquote(parse-expression(nth($conditions, 1)))} {
       // Recursive call
-      @include media(slice($conditions, 2)...) {
+      @include media(slice($conditions, 2) ...) {
         @content;
       }
     }

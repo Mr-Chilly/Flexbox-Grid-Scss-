@@ -1,7 +1,0 @@
-@import 'sizes';
-@import '../variables/colors';
-
-$boxShadow: 0 rem-size(1) 0 rgba($colorShadow, .1),
-  0 rem-size(1) rem-size(3) rgba($colorShadow, .1),
-  0 rem-size(4) rem-size(20) rgba($colorShadow, .035),
-  0 rem-size(1) rem-size(1) rgba($colorShadow, .025);

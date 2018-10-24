@@ -2,11 +2,14 @@
 
 @mixin base-tile {
   background-color: $colorPrimaryLight;
-  box-shadow: rem-size(0 2 2 0) rgba($colorPrimaryDark, .08);
+  border: rem-size(1) solid $colorInputBorder;
 }
 
-@mixin tile-wrapper-style {
+@mixin tile-wrapper-style($fullHeight: true) {
   @include base-tile();
+  @if $fullHeight {
+    height: 100%;
+  }
   border-radius: $radiusDefault;
 }
 
@@ -16,11 +19,10 @@
   justify-content: center;
   position: absolute;
   pointer-events: none;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: size(12);
-  height: size(12);
+  top: size(2);
+  right: size(2);
+  width: size(6);
+  height: size(6);
   background-color: $colorSuccess;
   color: $colorPrimaryLight;
   border-radius: 50%;
@@ -42,7 +44,6 @@
   @include tile-wrapper-style;
   display: flex;
   padding: 0;
-  min-height: size(31);
   width: 100%;
   overflow: hidden;
   flex-direction: column-reverse;
@@ -97,11 +98,13 @@
   width: 100%;
 
   .atom-rich-text-block {
-    @include block-content-style((
-      h2: confident,
-      h3: confident,
-      p: primary-elegant,
-    ));
+    @include block-content-style(
+      (
+        h2: confident,
+        h3: confident,
+        p: primary-elegant,
+      )
+    );
   }
 
   > h2 {
@@ -115,6 +118,4 @@
   @include media('>=lg') {
     max-width: size(48);
   }
-
 }
-

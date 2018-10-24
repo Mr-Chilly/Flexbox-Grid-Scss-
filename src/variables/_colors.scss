@@ -1,0 +1,38 @@
+$offWhite: #fafbfc;
+$lightGrey: #eff3f6;
+$darkGrey:rgba(27,31,35,0.2);
+$borderGrey: #e1e4e8;
+$buttonShadow: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+$black: #24292e;
+
+
+$rainbowRed: #EC1946;
+$rainbowPurple: #8456A1;
+$rainbowBlue: #006FB7;
+$rainbowLightBlue: #03A7E6;
+$rainbowTurquiose: #15BAB4;
+$rainbowGreen: #93C73E;
+$rainbowYellow: #FDB812;
+$rainbowOrange: #F27A1F;
+
+$rainbowColors: (
+  red: $rainbowRed,
+  purple: $rainbowPurple,
+  blue: $rainbowBlue,
+  lightBlue: $rainbowLightBlue,
+  turquiose: $rainbowTurquiose,
+  green: $rainbowGreen,
+  yellow: $rainbowYellow,
+  orange: $rainbowOrange,
+);
+
+
+$monoColors: (
+  white: $offWhite,
+  lightGrey: $lightGrey,
+  borderGrey: $borderGrey,
+  darkGrey: $darkGrey,
+  black: $black,
+);
+
+$colors: map-merge($rainbowColors, $monoColors);
