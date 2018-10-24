@@ -1,7 +1,7 @@
 /// This is the flexbox grid system.
 /// It will apply annotations to all items from file.
 /// @group Flexbox
-@import '../breakpoints';
+@import '../variables/breakpoints';
 $gridColumns: 12 !default;
 $gridGutter: $gridGutter !default;
 
