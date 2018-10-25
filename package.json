@@ -1,0 +1,24 @@
+{
+  "name": "scss-helper-utils",
+  "version": "1.0.0",
+  "description": "Scss helper functions",
+  "main": "index.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mr-Chilly/scss-helper-utils.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mr-Chilly/scss-helper-utils/issues"
+  },
+  "homepage": "https://github.com/Mr-Chilly/scss-helper-utils#readme",
+  "dependencies": {
+    "sassdoc": "^2.5.1",
+    "sassdoc-theme-neat": "^0.0.2",
+    "stylelint-config-slimmingworld": "https://bitbucket.org/milesbram/slimmingworld.platform.StylelintConfig#feature/prettier-config-rules#1.2.2"
+  }
+}
