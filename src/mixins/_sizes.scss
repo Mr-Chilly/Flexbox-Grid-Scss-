@@ -5,7 +5,6 @@ $baseFontSize: 16px;
 
 /// Strip the given value
 /// returning the number only.
-/// @group functions
 
 @function strip-unit($num) {
   @return $num / ($num * 0 + 1);

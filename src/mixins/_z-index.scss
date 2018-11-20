@@ -1,9 +1,10 @@
-/// Z-Index function
+
+$stack: content, form, footer, navigation, header, modal;
+
+/// Z-Index order function
 /// @param {string} $list (Array) - The list to find the current z-index in
 /// @param {string} $element (String) - The name of the current element, must be in the $list
 /// @returns {number}
-
-$stack: content, form, footer, navigation, header, modal;
 
 @function zindex($list: $stack, $element) {
   $index: index($list, $element);
